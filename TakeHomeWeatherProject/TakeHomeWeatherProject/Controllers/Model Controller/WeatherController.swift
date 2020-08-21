@@ -7,10 +7,14 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 class WeatherController {
     
     static let shared               = WeatherController()
+    
+    static let iconBaseURL          = URL(string: "http://openweathermap.org/img/w/")
+    static let png                  = ".png"
     
     static let baseURL              = URL(string: "http://api.openweathermap.org/data/2.5")
     static let weatherComponent     = "weather"
@@ -46,7 +50,15 @@ class WeatherController {
             
             do {
                 let weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
+                
+                //MARK: - Delete Print Statements
                 print(weatherResponse.main.temperature)
+                print(weatherResponse.name)
+                
+                for item in weatherResponse.weather {
+                    print(item.icon)
+                }
+            
                 completion(.success(weatherResponse))
                 
             } catch {
@@ -54,5 +66,28 @@ class WeatherController {
                 return completion(.failure(.thrownError(error)))
             }
         }.resume()
+    }
+    
+    static func fetchIconWith(urlString: String, completion: @escaping (Result<UIImage, WeatherError>) -> Void) {
+        
+        guard let baseURL       = iconBaseURL else { return completion(.failure(.invalidURL)) }
+        let finalURL            = baseURL.appendingPathComponent(urlString + png)
+        print(finalURL)
+        print(urlString)
+        
+        URLSession.shared.dataTask(with: finalURL) { (data, response, error) in
+            if let error = error {
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                return completion(.failure(.thrownError(error)))
+            }
+            
+            guard let data = data else { return completion(.failure(.noData)) }
+            
+            guard let icon = UIImage(data: data) else { return completion(.failure(.unableToDecode)) }
+            
+            return completion(.success(icon))
+            
+        }.resume()
+        
     }
 }// End of class

@@ -9,12 +9,33 @@
 import UIKit
 
 class TableViewController: UITableViewController {
+    
+    var weather: Weather?
+    
+    var icon: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         WeatherController.fetchWeatherWith(zipCode: "48915") { (result) in
             
+            switch result {
+                
+            case .success(let weather):
+                
+                for item in weather.weather {
+                    self.icon = item.icon
+                    print(item.icon)
+                }
+                
+                WeatherController.fetchIconWith(urlString: self.icon) { (result) in
+                    print()
+                }
+                
+            case .failure(let error):
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+            }
         }
     }
 
