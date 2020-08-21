@@ -10,33 +10,33 @@ import Foundation
 
 struct WeatherResponse: Codable {
     
-    let weather: [Weather]
-    let main: Main
-    let name: String
+    let weather:    [Weather]
+    let main:       Main
+    let name:       String
     
 }
 
 struct Weather: Codable {
-    let id: Int
-    let main: String
-    let description: String
-    let icon: String
+    let id:             Int
+    let main:           String
+    let description:    String
+    let icon:           String
     
 }
 
 struct Main: Codable {
     private enum CodingKeys: String, CodingKey {
-        case temperature = "temp"
-        case lowTemperature = "temp_min"
-        case highTemperature = "temp_max"
-        case humidity = "humidity"
+        case temperature            = "temp"
+        case lowTemperature         = "temp_min"
+        case highTemperature        = "temp_max"
+        case humidity               = "humidity"
         
     }
     
-    let temperature: Double
-    let lowTemperature: Double
-    let highTemperature: Double
-    let humidity: Double
+    let temperature:        Double
+    let lowTemperature:     Double
+    let highTemperature:    Double
+    let humidity:           Double
     
 }
 
