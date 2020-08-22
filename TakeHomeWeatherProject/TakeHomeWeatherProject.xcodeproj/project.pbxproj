@@ -19,6 +19,7 @@
 		D0909E4924EF4D4C0061E158 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0909E4824EF4D4C0061E158 /* WeatherError.swift */; };
 		D0909E8724F0ABEB0061E158 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0909E8624F0ABEB0061E158 /* WeatherTableViewCell.swift */; };
 		D0909E8924F0AF2B0061E158 /* WeatherListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0909E8824F0AF2B0061E158 /* WeatherListTableViewController.swift */; };
+		D0909E8B24F19EEA0061E158 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0909E8A24F19EEA0061E158 /* WeatherDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		D0909E4824EF4D4C0061E158 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		D0909E8624F0ABEB0061E158 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		D0909E8824F0AF2B0061E158 /* WeatherListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListTableViewController.swift; sourceTree = "<group>"; };
+		D0909E8A24F19EEA0061E158 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				D0909E8824F0AF2B0061E158 /* WeatherListTableViewController.swift */,
+				D0909E8A24F19EEA0061E158 /* WeatherDetailViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			files = (
 				D0909E4924EF4D4C0061E158 /* WeatherError.swift in Sources */,
 				D0909E8924F0AF2B0061E158 /* WeatherListTableViewController.swift in Sources */,
+				D0909E8B24F19EEA0061E158 /* WeatherDetailViewController.swift in Sources */,
 				D0909E8724F0ABEB0061E158 /* WeatherTableViewCell.swift in Sources */,
 				D0909E0C24EF320C0061E158 /* AppDelegate.swift in Sources */,
 				D0909E4324EF3BA60061E158 /* Weather.swift in Sources */,

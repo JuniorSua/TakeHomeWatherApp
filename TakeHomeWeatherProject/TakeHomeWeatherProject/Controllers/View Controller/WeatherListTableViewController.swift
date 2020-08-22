@@ -11,15 +11,19 @@ import UIKit
 class WeatherListTableViewController: UITableViewController {
     
     //MARK: - Outlets
-    var weatherResponse: [WeatherResponse] = []
-    var icon: String = ""
+    var weatherResponse: [WeatherResponse]      = []
+    var icon: String                            = ""
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchNewYorkWeather()
         fetchSaltLakeCityWeather()
         fetchSanFranciscoWeather()
-        self.tableView.reloadData()
         print("This is how many are in the array \(weatherResponse.count)")
     }
     
@@ -67,19 +71,14 @@ class WeatherListTableViewController: UITableViewController {
                             case .failure(let error):
                                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                             }
-                            
-                            
                         }
-                        
                         self.weatherResponse.append(weather)
                         self.tableView.reloadData()
                         
                     case .failure(let error):
                         print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                     }
-                    
                 }
-                
             }
         }
         
@@ -96,23 +95,25 @@ class WeatherListTableViewController: UITableViewController {
             switch result {
                 
             case .success(let weather):
-                
-                for item in weather.weather {
-                    self.icon = item.icon
-                    print(item.icon)
-                }
-                
-                WeatherController.fetchIconWith(urlString: self.icon) { (result) in
-                    switch result {
-                        
-                    case .success(_):
-                        print("Successfully retrieved icon")
-                        
-                    case .failure(let error):
-                        print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                DispatchQueue.main.async {
+                    for item in weather.weather {
+                        self.icon = item.icon
+                        print(item.icon)
                     }
+                    
+                    WeatherController.fetchIconWith(urlString: self.icon) { (result) in
+                        switch result {
+                            
+                        case .success(_):
+                            print("Successfully retrieved icon")
+                            
+                        case .failure(let error):
+                            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                        }
+                    }
+                    self.weatherResponse.append(weather)
+                    self.tableView.reloadData()
                 }
-                self.weatherResponse.append(weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
             }
@@ -125,23 +126,25 @@ class WeatherListTableViewController: UITableViewController {
             switch result {
                 
             case .success(let weather):
-                
-                for item in weather.weather {
-                    self.icon = item.icon
-                    print(item.icon)
-                }
-                
-                WeatherController.fetchIconWith(urlString: self.icon) { (result) in
-                    switch result {
-                        
-                    case .success(_):
-                        print("Successfully retrieved icon")
-                        
-                    case .failure(let error):
-                        print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                DispatchQueue.main.async {
+                    for item in weather.weather {
+                        self.icon = item.icon
+                        print(item.icon)
                     }
+                    
+                    WeatherController.fetchIconWith(urlString: self.icon) { (result) in
+                        switch result {
+                            
+                        case .success(_):
+                            print("Successfully retrieved icon")
+                            
+                        case .failure(let error):
+                            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                        }
+                    }
+                    self.weatherResponse.append(weather)
+                    self.tableView.reloadData()
                 }
-                self.weatherResponse.append(weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
             }
@@ -154,23 +157,25 @@ class WeatherListTableViewController: UITableViewController {
             switch result {
                 
             case .success(let weather):
-                
-                for item in weather.weather {
-                    self.icon = item.icon
-                    print(item.icon)
-                }
-                
-                WeatherController.fetchIconWith(urlString: self.icon) { (result) in
-                    switch result {
-                        
-                    case .success(_):
-                        print("Successfully retrieved icon")
-                        
-                    case .failure(let error):
-                        print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                DispatchQueue.main.async {
+                    for item in weather.weather {
+                        self.icon = item.icon
+                        print(item.icon)
                     }
+                    
+                    WeatherController.fetchIconWith(urlString: self.icon) { (result) in
+                        switch result {
+                            
+                        case .success(_):
+                            print("Successfully retrieved icon")
+                            
+                        case .failure(let error):
+                            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                        }
+                    }
+                    self.weatherResponse.append(weather)
+                    self.tableView.reloadData()
                 }
-                self.weatherResponse.append(weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
             }
@@ -188,8 +193,8 @@ class WeatherListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherTableViewCell else { return UITableViewCell() }
 
-        let weatherResponse = self.weatherResponse[indexPath.row]
-        cell.weatherResponse = weatherResponse
+        let weatherResponse         = self.weatherResponse[indexPath.row]
+        cell.weatherResponse        = weatherResponse
 
         return cell
     }
@@ -209,8 +214,13 @@ class WeatherListTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow, let destinationVC = segue.destination as? WeatherDetailViewController else { return }
+            let weather = weatherResponse[indexPath.row]
+            destinationVC.weatherResponse = weather
+            
+        }
+        
     }
 
 
