@@ -6,22 +6,55 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--City-->
         <scene sceneID="y4V-di-pf1">
             <objects>
-                <tableViewController id="HRN-lS-aq2" customClass="TableViewController" customModule="TakeHomeWeatherProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="HRN-lS-aq2" customClass="WeatherListTableViewController" customModule="TakeHomeWeatherProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fqW-9k-cL7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XJx-bh-ux6">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="weatherCell" rowHeight="146" id="XJx-bh-ux6" customClass="WeatherTableViewCell" customModule="TakeHomeWeatherProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="146"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XJx-bh-ux6" id="6w7-LD-JBR">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="146"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="9xW-Vd-0Un">
+                                            <rect key="frame" x="303" y="0.0" width="80" height="146"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyN-GY-8zA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="48.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEA-zi-Q2o">
+                                                    <rect key="frame" x="0.0" y="97.5" width="80" height="48.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kzs-2y-trq">
+                                            <rect key="frame" x="31" y="20" width="125" height="107"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="9xW-Vd-0Un" secondAttribute="trailing" id="Rm0-5o-ehY"/>
+                                        <constraint firstAttribute="bottom" secondItem="9xW-Vd-0Un" secondAttribute="bottom" id="dza-Up-1ab"/>
+                                        <constraint firstItem="9xW-Vd-0Un" firstAttribute="top" secondItem="6w7-LD-JBR" secondAttribute="top" id="ed5-OC-d4c"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cityNameLabel" destination="IyN-GY-8zA" id="WTN-Sb-pH6"/>
+                                    <outlet property="temperatureLabel" destination="oEA-zi-Q2o" id="9as-qD-nP8"/>
+                                    <outlet property="weatherIconImageView" destination="kzs-2y-trq" id="12u-4g-JDI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -29,18 +62,24 @@
                             <outlet property="delegate" destination="HRN-lS-aq2" id="uhP-E3-D7k"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="swG-Vf-7kM"/>
+                    <navigationItem key="navigationItem" title="City" id="swG-Vf-7kM">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="gs1-f6-Gr4">
+                            <connections>
+                                <action selector="addNewCityTapped:" destination="HRN-lS-aq2" id="Dre-yT-NzK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epy-6p-Nje" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="201" y="68"/>
+            <point key="canvasLocation" x="200.00000000000003" y="67.633928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hvf-Rn-ZMU">
             <objects>
                 <navigationController id="YwN-gQ-vwM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IEG-NC-bzX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="IEG-NC-bzX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
