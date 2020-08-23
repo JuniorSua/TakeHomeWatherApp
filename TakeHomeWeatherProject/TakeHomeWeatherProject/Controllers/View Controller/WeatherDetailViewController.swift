@@ -10,14 +10,14 @@ import UIKit
 
 class WeatherDetailViewController: UIViewController {
 
-    @IBOutlet var cityNameLabel: UILabel!
-    @IBOutlet var temperatureLabel: UILabel!
-    @IBOutlet var lowTemperatureLabel: UILabel!
-    @IBOutlet var highTemperatureLabel: UILabel!
-    @IBOutlet var humidityLabel: UILabel!
+    @IBOutlet var cityNameLabel:            UILabel!
+    @IBOutlet var temperatureLabel:         UILabel!
+    @IBOutlet var lowTemperatureLabel:      UILabel!
+    @IBOutlet var highTemperatureLabel:     UILabel!
+    @IBOutlet var humidityLabel:            UILabel!
     
-    @IBOutlet var weatherIconImageView: UIImageView!
-    @IBOutlet var weatherDescriptionLabel: UILabel!
+    @IBOutlet var weatherIconImageView:     UIImageView!
+    @IBOutlet var weatherDescriptionLabel:  UILabel!
     
     var weatherResponse: WeatherResponse? {
         didSet {
