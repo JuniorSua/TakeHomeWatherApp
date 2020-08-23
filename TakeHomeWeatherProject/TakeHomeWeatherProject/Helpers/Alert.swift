@@ -21,4 +21,10 @@ struct Alert {
             showBasicAlert(on: vc, with: title, message: "An error has occurred, please try again (Make sure your network connection is on via your Settings > Wi-FI or Cellular). If the app reports the same error, please report the error at contact@takehomeweatherproject.com")
         }
     }
+    
+    static func showZipCodeErrorAlert(on vc: UIViewController, title: String) {
+        DispatchQueue.main.async {
+            showBasicAlert(on: vc, with: title, message: "Please make sure your Zip code is valid")
+        }
+    }
 }

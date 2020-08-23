@@ -56,7 +56,7 @@ class WeatherListTableViewController: UITableViewController {
         
         let postAction = UIAlertAction(title: "Search", style: .default) { (_) in
             guard let bodyText = alertController.textFields?[0].text,
-                !bodyText.isEmpty else { return }
+                !bodyText.isEmpty, bodyText.count == 5 else { return Alert.showZipCodeErrorAlert(on: self, title: "Invalid Zip Code") }
             
             WeatherController.fetchWeatherWith(zipCode: bodyText) { (result) in
                 
