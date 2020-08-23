@@ -52,7 +52,6 @@ class WeatherController {
             do {
                 let weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: data)
                 
-                //MARK: - Delete Print Statements
                 print(weatherResponse.main.temperature)
                 print(weatherResponse.name)
                 

@@ -10,12 +10,13 @@ import UIKit
 
 class WeatherListTableViewController: UITableViewController {
     
-    var icon: String                            = ""
-    
+    var icon: String                  = ""
+    let saltLakeCityZipCode           = "84103"
+    let newYorkZipCode                = "10001"
+    let sanFranciscoZipCode           = "94104"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadData()
         
     }
@@ -65,7 +66,6 @@ class WeatherListTableViewController: UITableViewController {
                     case .success(let weather):
                         for item in weather.weather {
                             self.icon = item.icon
-                            print(item.icon)
                             
                         }
                         WeatherController.fetchIconWith(urlString: self.icon) { (result) in
@@ -73,9 +73,9 @@ class WeatherListTableViewController: UITableViewController {
                             switch result {
                             case .success(_):
                                 print("Successfully retrieved icon")
-                                print("This is how many are in the array2 \(WeatherController.shared.weatherResponse.count)")
                             case .failure(let error):
                                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                                Alert.showErrorAlert(on: self, title: "Error: 1-1")
                                 
                             }
                         }
@@ -85,6 +85,7 @@ class WeatherListTableViewController: UITableViewController {
                         
                     case .failure(let error):
                         print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                        Alert.showErrorAlert(on: self, title: "Error: 1-2")
                     }
                 }
             }
@@ -99,39 +100,42 @@ class WeatherListTableViewController: UITableViewController {
     
     func fetchSaltLakeCityWeather() {
         
-        WeatherController.fetchWeatherWith(zipCode: "84103") { (result) in
+        WeatherController.fetchWeatherWith(zipCode: saltLakeCityZipCode) { (result) in
             
             switch result {
             case .success(let weather):
                 self.loadIconWith(weather: weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                Alert.showErrorAlert(on: self, title: "Error: 1-3")
             }
         }
     }
     
     func fetchNewYorkWeather() {
         
-        WeatherController.fetchWeatherWith(zipCode: "10001") { (result) in
+        WeatherController.fetchWeatherWith(zipCode: newYorkZipCode) { (result) in
             
             switch result {
             case .success(let weather):
                 self.loadIconWith(weather: weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                Alert.showErrorAlert(on: self, title: "Error: 1-4")
             }
         }
     }
     
     func fetchSanFranciscoWeather() {
         
-        WeatherController.fetchWeatherWith(zipCode: "94104") { (result) in
+        WeatherController.fetchWeatherWith(zipCode: sanFranciscoZipCode) { (result) in
             
             switch result {
             case .success(let weather):
                 self.loadIconWith(weather: weather)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                Alert.showErrorAlert(on: self, title: "Error: 1-5")
             }
         }
     }
@@ -140,7 +144,6 @@ class WeatherListTableViewController: UITableViewController {
         DispatchQueue.main.async {
             for item in weather.weather {
                 self.icon = item.icon
-                print(item.icon)
             }
             
             WeatherController.fetchIconWith(urlString: self.icon) { (result) in
@@ -150,10 +153,10 @@ class WeatherListTableViewController: UITableViewController {
                     print("Successfully retrieved icon")
                 case .failure(let error):
                     print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                    Alert.showErrorAlert(on: self, title: "Error: 1-6")
                 }
             }
             WeatherController.shared.weatherResponse.append(weather)
-            print("This is how many are in the array 3: \(WeatherController.shared.weatherResponse.count)")
             self.tableView.reloadData()
         }
     }
