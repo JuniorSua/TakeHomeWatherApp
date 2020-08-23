@@ -10,25 +10,86 @@ import XCTest
 @testable import TakeHomeWeatherProject
 
 class TakeHomeWeatherProjectTests: XCTestCase {
+    
+    var weather: WeatherController!
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        super.setUp()
+        weather = WeatherController()
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        weather = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testIsBaseURL() {
+        let expectedURL = URL(string: "http://api.openweathermap.org/data/2.5")
+        let baseURL = WeatherController.baseURL
+        
+        XCTAssertEqual(expectedURL, baseURL)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testIsIconBaseURL() {
+        let expectedURL = URL(string: "http://openweathermap.org/img/w/")
+        let iconBaseURL = WeatherController.iconBaseURL
+        
+        XCTAssertEqual(expectedURL, iconBaseURL)
     }
-
+    
+    func testIsImagePng() {
+        let expectedImageType = ".png"
+        let png = WeatherController.png
+        
+        XCTAssertEqual(expectedImageType, png)
+    }
+    
+    func testIsWeatherComponent() {
+        let expectedWeatherComponent = "weather"
+        let weatherComponent = WeatherController.weatherComponent
+        
+        XCTAssertEqual(expectedWeatherComponent, weatherComponent)
+    }
+    
+    func testIsQueryZip() {
+        let expectedZipQuery = "zip"
+        let zipQuery = WeatherController.zipQuery
+        
+        XCTAssertEqual(expectedZipQuery, zipQuery)
+    }
+    
+    func testIsQueryUnit() {
+        let expectedUnitQuery = "units"
+        let unitQuery = WeatherController.unitQuery
+        
+        XCTAssertEqual(expectedUnitQuery, unitQuery)
+    }
+    
+    func testIsUnitImperial() {
+        let expectedUnit = "imperial"
+        let unit = WeatherController.unitImperialValue
+        
+        XCTAssertEqual(expectedUnit, unit)
+    }
+    
+    func testIsAPIIDQuery() {
+        let expectedAPIIDQuery = "appid"
+        let apiIDQuery = WeatherController.apiID
+        
+        XCTAssertEqual(expectedAPIIDQuery, apiIDQuery)
+    }
+    
+    func testIsAPIValue() {
+        let expectedAPIValue = "da65fafb6cb9242168b7724fb5ab75e7"
+        let apiValue = WeatherController.apiValue
+        
+        XCTAssertEqual(expectedAPIValue, apiValue)
+    }
+    
+    func testIsCountryCode() {
+        let expectedCountryCode = ",us"
+        let countryCode = WeatherController.countryCode
+        
+        XCTAssertEqual(expectedCountryCode, countryCode)
+    }
 }
