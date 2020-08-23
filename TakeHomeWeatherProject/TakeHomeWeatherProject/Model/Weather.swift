@@ -43,7 +43,7 @@ struct Main: Codable {
 extension WeatherResponse: Equatable {
     static func == (lhs: WeatherResponse, rhs: WeatherResponse) -> Bool {
         return lhs.name == rhs.name
-        
+
     }
 }
 

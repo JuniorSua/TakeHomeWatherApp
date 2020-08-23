@@ -92,4 +92,25 @@ class TakeHomeWeatherProjectTests: XCTestCase {
         
         XCTAssertEqual(expectedCountryCode, countryCode)
     }
+    
+    func testIsInvalidURL() {
+        let expectedReturn = "We have an invalid url"
+        let invalidURL = WeatherError.invalidURL.localizedDescription
+        
+        XCTAssertEqual(expectedReturn, invalidURL)
+    }
+    
+    func testIsNoData() {
+        let expectedReturn = "We have no data"
+        let noData = WeatherError.noData.localizedDescription
+        
+        XCTAssertEqual(expectedReturn, noData)
+    }
+    
+    func testIsUnableToDecode() {
+        let expectedReturn = "We were not able to decode"
+        let unableToDecode = WeatherError.unableToDecode.localizedDescription
+        
+        XCTAssertEqual(expectedReturn, unableToDecode)
+    }
 }
